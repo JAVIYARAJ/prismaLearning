@@ -1,9 +1,8 @@
 const express=require('express')
 
-const {GraphQlController}=require('../controller/graphql')
+const {GraphQlController}=require('../controller/user-controller')
 
 const route=express.Router()
-
 
 route.get('/users',GraphQlController.getUser);
 route.post('/createUser',GraphQlController.createUser);

@@ -8,10 +8,28 @@ datasource db {
 }
 
 model User{
-    id Int @id @default(autoincrement())
+    id String @id @default(uuid())
     firstname String
     lastname String
     email String
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
+    isDeleted Boolean @default(false)
+    taskCreater Task[] @relation("taskCreater")
+    assingedUser Task[] @relation("assingedUser")
+}
+
+model Task{
+  id String @id @default(uuid())
+  title String
+  description String
+  createdBy User @relation("taskCreater",fields: [createdId],references: [id])
+  createdId String
+  asignedBy User @relation("assingedUser",fields: [assigedId],references: [id])
+  assigedId String
+  status String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  isDeleted Boolean @default(false)
+
 }
